@@ -1,0 +1,155 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.search-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.search-bar {
+  padding: 10px;
+  background-color: #f2f2f2;
+}
+
+.search-bar input {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.table-container {
+  overflow-x: auto;
+  max-width: 100%;
+  position: relative;
+}
+
+table {
+  width: max-content;
+  min-width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+th, td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: center;
+  white-space: nowrap;
+}
+
+th {
+  background-color: #0072B8;
+  color: white;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  border-radius: 10px 10px 0 0;
+}
+
+th:first-child {
+  border-top-left-radius: 10px;
+}
+
+th:last-child {
+  border-top-right-radius: 10px;
+}
+
+td:last-child, th:last-child {
+  position: sticky;
+  right: 0;
+  z-index: 1;
+}
+
+th:last-child {
+  z-index: 11;
+  background-color: #0072B8;
+}
+
+td:last-child {
+  background-color: #f2f2f2;
+}
+
+th:last-child::after, td:last-child::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 100%;
+  bottom: -1px;
+  width: 5px;
+  background: linear-gradient(to right, rgba(0,0,0,0), rgba(0,0,0,0.1));
+}
+
+.pagination {
+  padding: 10px;
+  background-color: #f2f2f2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.pagination button {
+  margin: 0 10px;
+}
+
+.edit-btn, .delete-btn, .save-btn, .cancel-btn {
+  padding: 5px 8px;  /* Reducido el padding horizontal */
+  margin: 2px 1px;   /* Reducido el margen horizontal */
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  white-space: nowrap;
+  font-size: 0.9em;  /* Reducido el tamaño de la fuente */
+}
+
+.edit-btn {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.delete-btn {
+  background-color: #f44336;
+  color: white;
+}
+
+.save-btn {
+  background-color: #008CBA;
+  color: white;
+}
+
+.cancel-btn {
+  background-color: #555555;
+  color: white;
+}
+
+td input, td select {
+  width: 100%;
+  padding: 4px;
+  border: 1px solid #ddd;
+  border-radius: 3px;
+  text-align: center;
+}
+
+.actions-column {
+  min-width: 170px;  /* Reducido de 200px a 150px */
+  width: 150px;      /* Ancho fijo para la columna de acciones */
+}
+
+@media screen and (max-width: 600px) {
+  .table-container {
+    overflow-x: scroll;
+  }
+  
+  th, td {
+    min-width: 100px;
+  }
+
+  .actions-column {
+    min-width: 120px;  /* Aún más reducido para pantallas pequeñas */
+    width: 120px;
+  }
+}

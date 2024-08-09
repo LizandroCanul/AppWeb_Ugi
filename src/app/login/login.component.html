@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gobierno de Yucatán - Login</title>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <img src="/assets/images/SAF_Yucatán_2018_-_2024.png" alt="Imagen izquierda" class="header-image">
+        <h1 class="header-title">Gobierno de Yucatán</h1>
+        <div class="header-controls">
+            <button class="header-button" [class.active]="isContentVisible" (click)="toggleContent()">Inicio</button>
+            <button class="header-button">Servicios</button>
+            <button class="header-button">Departamentos</button>
+            <button class="header-button">Transparencia</button>
+            <button class="header-button">Contacto</button>
+            <div class="search-container">
+                <button class="login-button" (click)="toggleLoginForm()">Login</button>
+                <input type="text" placeholder="Buscar..." class="search-input">
+                <button class="search-button">🔍</button>
+            </div>
+        </div>
+    </header>
+
+    <div class="content-wrapper" [class.visible]="isContentVisible">
+        <div class="content-container">
+            <h2>¿Quienes Somos?</h2>
+            <h3>Secretaria de Administración y Finanzas:</h3>
+            <p>La SAF es parte de una larga tradición de gestión financiera en México, marcada por la adaptación constante a los cambios históricos y las necesidades del gobierno y la sociedad. Su evolución refleja no solo la historia local de Mérida, sino también las tendencias más amplias en la administración pública a nivel nacional.</p>
+            
+            <h3>Visión:</h3>
+            <p>Optimizar los recursos en la administración pública del Estado de Yucatán, mediante una administración eficiente, eficaz, transparente y honesta que mantenga finanzas sanas e impulse el desarrollo de la población.</p>
+            
+            <h3>Misión:</h3>
+            <p>Ser un gobierno que haga más con menos, reconocido por eficiente, austero, abierto, transparente, innovador, honesto, financieramente sostenible, con intervenciones públicas que mejoran la calidad de vida y resuelven los problemas de la población de una manera participativa y colaborativa con las demás dependencias, entidades y niveles de gobierno.</p>
+
+            <h2>Nuestros Módulos</h2>
+            <h3>Unidad de la Gestión de la Inversión:</h3>
+            <p>La UGI (Unidad de Gestión de la Inversión) es una división de la Secretaría de Administración y Finanzas (SAF) del Gobierno de Yucatán. Su principal función es supervisar y optimizar la inversión pública en el estado. La UGI se encarga de evaluar, coordinar y dar seguimiento a proyectos de inversión, asegurando que estos sean viables y se alineen con los objetivos de desarrollo de Yucatán. También participa en la planeación estratégica, la gestión de recursos y la promoción de la transparencia en el uso de fondos públicos. En esencia, la UGI juega un papel crucial en asegurar que las inversiones estatales se realicen de manera eficiente y efectiva, contribuyendo así al desarrollo económico y social de Yucatán.</p>
+            
+            <h3>Misión:</h3>
+            <p>Ser un organismo moderno, eficaz y proactivo, conformado con personal altamente calificado y con vocación de servicio, que destaque en la Administración Pública Estatal por implementar políticas, estrategias y acciones, encaminadas a mejorar la calidad de la inversión pública.</p>
+
+            <h3>Visión:</h3>
+            <p>Ser el órgano técnico y de gestión de la inversión del Gobierno del Estado, que proporciona asesoría, capacitación, evaluación, dictamen, administración y seguimiento a dependencias y entidades, con el propósito de promover la realización de aquellos estudios, programas y proyectos de inversión que demuestren su rentabilidad social, que resuelvan problemas públicos que afectan a la sociedad y que contribuyen a mejorar la calidad de vida de los beneficiarios.</p>
+        </div>
+    </div>
+
+    <div class="login-container" *ngIf="showLoginForm">
+        <div class="login-form">
+            <img src="assets/images/images.png" alt="Login" class="login-image">
+            <form (ngSubmit)="onSubmit()">
+                <div>
+                    <label for="username">Username:</label>
+                    <input type="text" id="username" [(ngModel)]="username" name="username" required>
+                </div>
+                <div>
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" [(ngModel)]="password" name="password" required>
+                </div>
+                <p class="error-message" *ngIf="errorMessage">{{ errorMessage }}</p>
+                <button type="submit">Login</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

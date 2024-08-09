@@ -1,0 +1,182 @@
+<div class="search-container">
+  <div class="search-bar">
+    <input [(ngModel)]="searchTerm" (input)="onSearch()" placeholder="Buscar en todos los campos...">
+  </div>
+  <div class="table-container">
+    <table>
+      <thead>
+        <tr>
+          <th>Siglas del Ente público</th>
+          <th>Nombre del ente público</th>
+          <th>Número de la UBP</th> 
+          <th>Nombre de la UBP</th>
+          <th>Responsable</th>
+          <th>Beneficio otorgado</th>
+          <th>Tipo de beneficio</th>
+          <th>Método de pago</th>
+          <th>Importe Monetario</th>
+          <th>Origen del recurso</th>
+          <th>Nombre</th>
+          <th>CURP</th>
+          <th>Edad</th>
+          <th>Sexo</th>
+          <th>Fecha de nacimiento </th>
+          <th>Entidad Federativa de nacimiento</th>
+          <th>Maya Hablante</th>
+          <th>Beneficiario con Discapacidad</th>
+          <th>Tipo de beneficiario</th>
+          <th>Estado Civil</th>
+          <th>Domicilio del Beneficiario</th>
+          <th>Código Postal</th>
+          <th>Organización territorial</th>
+          <th>Beneficiario Dependiente</th>
+          <th>Parentesco</th>
+          <th>Domicilio del tutor</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of displayedData; let i = index">
+          <td>
+            <span *ngIf="editingIndex !== i">{{item.siglasEntPublico}}</span>
+            <input *ngIf="editingIndex === i" [(ngModel)]="editingItem.siglasEntPublico">
+          </td>
+          <td>
+            <span *ngIf="editingIndex !== i">{{item.nombreEntPublico}}</span>
+            <input *ngIf="editingIndex === i" [(ngModel)]="editingItem.nombreEntPublico">
+          </td>
+          <td>
+            <span *ngIf="editingIndex !== i">{{item.numeroUBP}}</span>
+            <input *ngIf="editingIndex === i" [(ngModel)]="editingItem.numeroUBP">
+          </td>
+          <td>
+            <span *ngIf="editingIndex !== i">{{item.nombreUBP}}</span>
+            <input *ngIf="editingIndex === i" [(ngModel)]="editingItem.nombreUBP">
+          </td>
+          <td>
+            <span *ngIf="editingIndex !== i">{{item.responsable}}</span>
+            <input *ngIf="editingIndex === i" [(ngModel)]="editingItem.responsable">
+          </td>
+          <td>
+            <span *ngIf="editingIndex !== i">{{item.beneficioOtorgado}}</span>
+            <input *ngIf="editingIndex === i" [(ngModel)]="editingItem.beneficioOtorgado">
+          </td>
+          <td>
+            <span *ngIf="editingIndex !== i">{{item.tipoBeneficio}}</span>
+            <input *ngIf="editingIndex === i" [(ngModel)]="editingItem.tipoBeneficio">
+          </td>
+          <td>
+            <span *ngIf="editingIndex !== i">{{item.metodoPago}}</span>
+            <input *ngIf="editingIndex === i" [(ngModel)]="editingItem.metodoPago">
+          </td>
+          <td>
+            <span *ngIf="editingIndex !== i">{{"$" + item.importeMonetario}}</span>
+            <input *ngIf="editingIndex === i" [(ngModel)]="editingItem.importeMonetario" type="number">
+          </td>
+          <td>
+            <span *ngIf="editingIndex !== i">{{item.origenRecurso}}</span>
+            <input *ngIf="editingIndex === i" [(ngModel)]="editingItem.origenRecurso">
+          </td>
+          <td>
+            <span *ngIf="editingIndex !== i">{{item.nombres}} {{item.apellidoPaterno}} {{item.apellidoMaterno}}</span>
+            <input *ngIf="editingIndex === i" [(ngModel)]="editingItem.nombres" placeholder="Nombres">
+            <input *ngIf="editingIndex === i" [(ngModel)]="editingItem.apellidoPaterno" placeholder="Apellido Paterno">
+            <input *ngIf="editingIndex === i" [(ngModel)]="editingItem.apellidoMaterno" placeholder="Apellido Materno">
+          </td>
+          <td>
+            <span *ngIf="editingIndex !== i">{{item.curp}}</span>
+            <input *ngIf="editingIndex === i" [(ngModel)]="editingItem.curp">
+          </td>
+          <td>
+            <span *ngIf="editingIndex !== i">{{item.edad}}</span>
+            <input *ngIf="editingIndex === i" [(ngModel)]="editingItem.edad" type="number">
+          </td>
+          <td>
+            <span *ngIf="editingIndex !== i">{{item.sexo}}</span>
+            <select *ngIf="editingIndex === i" [(ngModel)]="editingItem.sexo">
+              <option value="Masculino">Masculino</option>
+              <option value="Femenino">Femenino</option>
+            </select>
+          </td>
+          <td>
+            <span *ngIf="editingIndex !== i">{{item.fechaNacimiento}}</span>
+            <input *ngIf="editingIndex === i" [(ngModel)]="editingItem.fechaNacimiento" type="date">
+          </td>
+          <td>
+            <span *ngIf="editingIndex !== i">{{item.entidadFederativaNacimiento}}</span>
+            <input *ngIf="editingIndex === i" [(ngModel)]="editingItem.entidadFederativaNacimiento">
+          </td>
+          <td>
+            <span *ngIf="editingIndex !== i">{{item.mayaHablante}}</span>
+            <select *ngIf="editingIndex === i" [(ngModel)]="editingItem.mayaHablante">
+              <option value="Sí">Sí</option>
+              <option value="No">No</option>
+            </select>
+          </td>
+          <td>
+            <span *ngIf="editingIndex !== i">{{item.beneficiarioDiscapacidad}}</span>
+            <select *ngIf="editingIndex === i" [(ngModel)]="editingItem.beneficiarioDiscapacidad">
+              <option value="Sí">Sí</option>
+              <option value="No">No</option>
+            </select>
+          </td>
+          <td>
+            <span *ngIf="editingIndex !== i">{{item.tipoBeneficiario}}</span>
+            <input *ngIf="editingIndex === i" [(ngModel)]="editingItem.tipoBeneficiario">
+          </td>
+          <td>
+            <span *ngIf="editingIndex !== i">{{item.estadoCivil}}</span>
+            <input *ngIf="editingIndex === i" [(ngModel)]="editingItem.estadoCivil">
+          </td>
+          <td>
+            <span *ngIf="editingIndex !== i">{{item.direccion}} {{item.tipoAsentamiento}}. {{item.nombreAsentamiento}}</span>
+            <input *ngIf="editingIndex === i" [(ngModel)]="editingItem.direccion" placeholder="Dirección">
+            <input *ngIf="editingIndex === i" [(ngModel)]="editingItem.tipoAsentamiento" placeholder="Tipo de Asentamiento">
+            <input *ngIf="editingIndex === i" [(ngModel)]="editingItem.nombreAsentamiento" placeholder="Nombre de Asentamiento">
+          </td>
+          <td>
+            <span *ngIf="editingIndex !== i">{{item.codigoPostal}}</span>
+            <input *ngIf="editingIndex === i" [(ngModel)]="editingItem.codigoPostal">
+          </td>
+          <td>
+            <span *ngIf="editingIndex !== i">{{item.entidadFederativa}}, {{item.municipio}}, {{item.localidad}}</span>
+            <input *ngIf="editingIndex === i" [(ngModel)]="editingItem.entidadFederativa" placeholder="Entidad Federativa">
+            <input *ngIf="editingIndex === i" [(ngModel)]="editingItem.municipio" placeholder="Municipio">
+            <input *ngIf="editingIndex === i" [(ngModel)]="editingItem.localidad" placeholder="Localidad">
+          </td>
+          <td>
+            <span *ngIf="editingIndex !== i && item.nombresDependiente">
+              {{item.nombresDependiente}} {{item.apellidoPaternoDependiente}} {{item.apellidoMaternoDependiente}}
+            </span>
+            <input *ngIf="editingIndex === i" [(ngModel)]="editingItem.nombresDependiente" placeholder="Nombres">
+            <input *ngIf="editingIndex === i" [(ngModel)]="editingItem.apellidoPaternoDependiente" placeholder="Apellido Paterno">
+            <input *ngIf="editingIndex === i" [(ngModel)]="editingItem.apellidoMaternoDependiente" placeholder="Apellido Materno">
+          </td>
+          <td>
+            <span *ngIf="editingIndex !== i">{{item.parentesco}}</span>
+            <input *ngIf="editingIndex === i" [(ngModel)]="editingItem.parentesco">
+          </td>
+          <td>
+            <span *ngIf="editingIndex !== i">{{item.curpDependiente}}</span>
+            <input *ngIf="editingIndex === i" [(ngModel)]="editingItem.curpDependiente">
+          </td>
+          <td>
+            <span *ngIf="editingIndex !== i">{{item.domicilioTutor}}</span>
+            <input *ngIf="editingIndex === i" [(ngModel)]="editingItem.domicilioTutor">
+          </td>
+          <td class="actions-column">
+            <button *ngIf="editingIndex !== i" class="edit-btn" (click)="startEditing(i)">Editar</button>
+            <button *ngIf="editingIndex === i" class="save-btn" (click)="saveEdit()">Guardar</button>
+            <button *ngIf="editingIndex === i" class="cancel-btn" (click)="cancelEdit()">Cancelar</button>
+            <button class="delete-btn" (click)="deleteItem(i)">Eliminar</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="pagination">
+    <button (click)="prevPage()" [disabled]="currentPage === 1">Anterior</button>
+    <span>Página {{currentPage}} de {{totalPages}}</span>
+    <button (click)="nextPage()" [disabled]="currentPage === totalPages">Siguiente</button>
+  </div>
+</div>
