@@ -1,0 +1,235 @@
+<form (ngSubmit)="onSubmit()" #registrationForm="ngForm">
+  <h3>Identificación del beneficio</h3>
+  <div class="form-row">
+    <div class="form-group">
+      <label for="nombreEntPublico">Nombre del ente público:</label>
+      <select type="text" id="nombreEntPublico" name="nombreEntPublico" [(ngModel)]="formData.nombreEntPublico" required>
+        <option value="Colegio De Bachilleres Del Estado De Yucatán">Colegio De Bachilleres Del Estado De Yucatán</option> 
+        <option value="Secretaria De Educación">Secretaria De Educación</option>         
+        <option value="Junta De Agua Potable Y Alcantarillado De Yucatán">Junta De Agua Potable Y Alcantarillado De Yucatán</option>
+        <option value="Secretaria De La Contraloría General">Secretaria De La Contraloría General</option>
+        <option value="Patronato De Las Unidades De Servicios Culturales Y Turísticos Del Estado De Yucatán">Patronato De Las Unidades De Servicios Culturales Y Turísticos Del Estado De Yucatán</option>
+        <option value="Sistema Para El Desarrollo Integral De La Familia">Sistema Para El Desarrollo Integral De La Familia</option>
+        <option value="Fideicomiso Público Para El Desarrollo Del Turismo De Reuniones En Yucatán">Fideicomiso Público Para El Desarrollo Del Turismo De Reuniones En Yucatán</option>
+        <option value="Instituto Del Deporte Del Estado De Yucatán">Instituto Del Deporte Del Estado De Yucatán</option>
+        <option value="Instituto De Movilidad Y Desarrollo Urbano Territorial">Instituto De Movilidad Y Desarrollo Urbano Territorial</option>
+        <option value="Instituto Para El Desarrollo De La Cultura Maya Del Estado De Yucatán">Instituto Para El Desarrollo De La Cultura Maya Del Estado De Yucatán</option>   
+        <option value="Secretaría De Desarrollo Rural">Secretaría De Desarrollo Rural</option>
+        <option value="Secretaria De Desarrollo Social">Secretaria De Desarrollo Social</option>
+        <option value="Secretaría De Fomento Turístico">Secretaría De Fomento Turístico</option>
+        <option value="Universidad De Las Artes De Yucatán">Universidad De Las Artes De Yucatán</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="siglasEntPublico">Siglas del ente público:</label>
+      <select type="text" id="siglasEntPublico" name="siglasEntPublico" [(ngModel)]="formData.siglasEntPublico" required>
+        <option value="COBAY">COBAY</option>
+        <option value="SEGUEY">SEGUEY</option>
+        <option value="JAPAY, ">JAPAY, </option>
+        <option value="CULTUR">CULTUR</option>
+        <option value="DIF">DIF</option>
+        <option value="SEDESOL">SEDESOL</option>
+        <option value="FIDETURE">FIDETURE</option>
+        <option value="IDEY">IDEY</option>
+        <option value="IMDUT">IMDUT</option>
+        <option value="INDEMAYA">INDEMAYA</option>
+        <option value="SEDER">SEDER</option>
+        <option value="SECOGUEY">SECOGUEY</option>
+        <option value="SEFOTUR">SEFOTUR</option>
+        <option value="UNAY">UNAY</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="numeroUBP">Número de la UBP:</label>
+      <input type="text" id="numeroUBP" name="numeroUBP" [(ngModel)]="formData.numeroUBP" required>
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="form-group">
+      <label for="nombreUBP">Nombre de la UBP:</label>
+      <input type="text" id="nombreUBP" name="nombreUBP" [(ngModel)]="formData.nombreUBP" required>
+    </div>
+    <div class="form-group">
+      <label for="responsable">Responsable (Centro de Costo a Tres niveles):</label>
+      <input type="text" 
+             id="responsable" 
+             name="responsable" 
+             [(ngModel)]="formData.responsable" 
+             required 
+             pattern="^\d{1,2}(\.\d{1,2}){2}$"
+             #responsable="ngModel"
+             (input)="onResponsableInput($event)">
+      <div *ngIf="responsable.invalid && (responsable.dirty || responsable.touched)" class="alert alert-danger">
+        Por favor, ingrese un número en el formato correcto (ej. 12.24.34)
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="beneficioOtorgado">Beneficio otorgado:</label>
+    <select id="beneficioOtorgado" name="beneficioOtorgado" 
+            [(ngModel)]="formData.beneficioOtorgado" 
+            (ngModelChange)="onBeneficioOtorgadoChange()" required>
+      <option value="Monetario">Monetario</option>
+      <option value="Especie">Especie</option>
+      <option value="Servicios">Servicios</option>
+      <option value="Mixto">Mixto</option>
+      <option value="Producto Subsidiario">Producto Subsidiario</option>
+      <option value="Indirecto">Indirecto</option>
+    </select>
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="form-group">
+      <label for="tipoBeneficio">Tipo de beneficio:</label>
+      <input type="text" id="tipoBeneficio" name="tipoBeneficio" [(ngModel)]="formData.tipoBeneficio" required>
+    </div>
+    <div class="form-group">
+      <label for="metodoPago">Método de pago:</label>
+    <select id="metodoPago" name="metodoPago" 
+            [(ngModel)]="formData.metodoPago" 
+            [attr.disabled]="!isMonetario() ? '' : null"
+            [ngClass]="{'disabled-select': !isMonetario()}" required>
+      <option value="Transferencia">Transferencia</option>
+      <option value="Efectivo">Efectivo</option>
+      <option value="Cheque">Cheque</option>
+      <option value="Vales">Vales</option>
+      <option value="Tarjeta de débito">Tarjeta de débito</option>
+      <option value="Tarjeta de servicio">Tarjeta de servicio</option>
+      <option value="Tarjeta bancaria">Tarjeta bancaria</option>
+      <option value="Canal cerrado">Canal cerrado</option>
+      <option value="Orden de Pago">Orden de Pago</option>
+      <option value="Cedula">Cedula</option>
+      <option value="Ventanilla">Ventanilla</option>
+      <option value="N/A">N/A</option>
+    </select>
+    </div>
+    <div class="form-group">
+      <label for="importeMonetario">Importe Monetario:</label>
+      <input type="text" 
+             id="importeMonetario" 
+             name="importeMonetario" 
+             [(ngModel)]="formData.importeMonetario" 
+             [attr.disabled]="!isMonetario() ? '' : null"
+             [ngClass]="{'disabled-input': !isMonetario()}"
+             (input)="onImporteMonetarioInput($event)"
+             required>
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="form-group">
+      <label for="origenRecurso">Origen del recurso:</label>
+      <select type="text" id="origenRecurso" name="origenRecurso" [(ngModel)]="formData.origenRecurso" required>
+        <option value="Estatal">Estatal</option>
+        <option value="Federal">Federal</option>
+        <option value="Estatal y Federal">Estatal y Federal</option>
+      </select>
+    </div>
+  </div>
+
+  <h3>Identificación de la Empresa Benficiaria</h3>
+
+<div>
+  <div class="form-row">
+    <div class="form-group">
+      <label for="curp">Razón Social de la Empresa</label>
+      <input type="text" id="rsc" name="rsc" [(ngModel)]="formData.rsc" required>
+    </div>
+    <div class="form-group">
+      <label for="rfc">RFC:</label>
+      <input type="text" 
+             id="rfc" 
+             name="rfc" 
+             [(ngModel)]="formData.rfc" 
+             (input)="onRFCChange()"
+             required>
+      <div *ngIf="rfcError" class="alert alert-danger">
+        {{ rfcError }}
+      </div>
+      <div *ngIf="rfcType" class="alert alert-info">
+        Tipo de RFC: {{ rfcType }}
+      </div>
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="form-group">
+      <label for="direccion">Dirección:  (Ej: C.16a #243 x 33 y 35)</label>
+      <input type="text" id="direccionE" name="direccionE" [(ngModel)]="formData.direccionE" required>
+    </div>
+    <div class="form-group">
+      <label for="tipoAsentamientoE">Tipo de Asentamiento:</label>
+      <select type="text" id="tipoAsentamientoE" name="tipoAsentamientoE" [(ngModel)]="formData.tipoAsentamientoE" required>
+      <option value="Colonia">Colonia</option>
+      <option value="Fraccionamiento">Fraccionamiento</option>
+      <option value="Departamento">Departamento</option>
+      <option value="Barrio">Barrio</option>
+      <option value="Comisaria">Comisaria</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="nombreAsentamientoE">Nombre del asentamiento:</label>
+      <input type="text" id="nombreAsentamientoE" name="nombreAsentamientoE" [(ngModel)]="formData.nombreAsentamientoE" required>
+    </div>
+  </div>
+</div>
+
+
+  <div class="form-row">
+    <div class="form-group">
+      <label for="codigoPostal">Código Postal:</label>
+      <input type="text" id="codigoPostalE" name="codigoPostalE" [(ngModel)]="formData.codigoPostalE" required>
+    </div>
+    <div class="form-group">
+      <label for="entidadFederativa">Entidad Federativa:</label>
+      <input type="text" id="entidadFederativaE" name="entidadFederativaE" [(ngModel)]="formData.entidadFederativaE" required>
+    </div>
+    <div class="form-group">
+      <label for="municipio">Municipio:</label>
+      <input type="text" id="municipioE" name="municipioE" [(ngModel)]="formData.municipioE" required>
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="form-group">
+      <label for="localidad">Localidad:</label>
+      <input type="text" id="localidadE" name="localidadE" [(ngModel)]="formData.localidadE" required>
+    </div>
+  </div>
+
+  <h3>Representante de la Empresa</h3>
+<div>
+  <div class="form-row">
+    <div class="form-group">
+      <label for="curp">CURP del Representante:</label>
+      <input type="text" 
+             id="curp" 
+             name="curp" 
+             [(ngModel)]="formData.curp" 
+             (input)="onCURPChange()"
+             required>
+      <div *ngIf="curpError" class="alert alert-danger">
+        {{ curpError }}
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="nombresDependiente">Nombre(s):</label>
+      <input type="text" id="nombresDependiente" name="nombresDependiente" [(ngModel)]="formData.nombresDependiente" required>
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="form-group">
+      <label for="apellidoPaternoDependiente">Apellido Paterno:</label>
+      <input type="text" id="apellidoPaternoDependiente" name="apellidoPaternoDependiente" [(ngModel)]="formData.apellidoPaternoDependiente" required>
+    </div>
+    <div class="form-group">
+      <label for="apellidoMaternoDependiente">Apellido Materno:</label>
+      <input type="text" id="apellidoMaternoDependiente" name="apellidoMaternoDependiente" [(ngModel)]="formData.apellidoMaternoDependiente" required>
+    </div>
+    <div class="form-group">
+      <label for="domicilioTutor">Contacto: (Teléfono-Correo)</label>
+      <input type="text" id="contacto" name="contacto" [(ngModel)]="formData.Contacto" required>
+    </div>
+  </div>
+</div>
+<button type="submit" class="save-btn">Guardar Datos</button>
+</form>

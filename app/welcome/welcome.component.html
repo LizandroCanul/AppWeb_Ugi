@@ -1,0 +1,98 @@
+<div class="welcome-container">
+  <div class="sidebar">
+    <div class="logo-container">
+      <img src="assets/images/images.png" alt="Logo" class="logo">
+    </div>
+    <div class="menu-container">
+      <div class="dropdown">
+        <button class="dropbtn">Servicios Normativos</button>
+        <div class="dropdown-content">
+          <a (click)="selectOption('registro')">Mensajes</a>
+          <a (click)="selectOption('busqueda')">Oficios</a>
+          <a (click)="selectOption('busqueda')">Segimiento</a>
+        </div>
+      </div>
+      <div class="dropdown">
+        <button class="dropbtn">Estructaración y Gestón Financiera</button>
+        <div class="dropdown-content">
+          <a (click)="selectOption('registro')">Padrones:</a>
+          <a (click)="selectOption('registro')">Registro</a>
+          <a (click)="selectOption('busqueda')">Búsqueda</a>
+        </div>
+      </div>
+      <div class="dropdown">
+        <button class="dropbtn">Control y Registro Normativo</button>
+        <div class="dropdown-content">
+          <a (click)="selectOption('registro')">Archivos</a>
+          <a (click)="selectOption('busqueda')">Seguimiento</a>
+        </div>
+      </div>
+      <div class="dropdown">
+        <button class="dropbtn">Evaluación Tecnica Ambiental</button>
+        <div class="dropdown-content">
+          <a (click)="selectOption('registro')">Archivo</a>
+          <a (click)="selectOption('busqueda')">Oficios</a>
+        </div>
+      </div>
+      <div class="dropdown">
+        <button class="dropbtn">Administración de Cartera</button>
+        <div class="dropdown-content">
+          <a (click)="selectOption('registro')">Cartera de Inverción:</a>
+          <a (click)="selectOption('registro')">Registro de Proyectos</a>
+          <a (click)="selectOption('busqueda')">Segimiento</a>
+        </div>
+      </div>
+      <div class="dropdown">
+        <button class="dropbtn">Evaluación Socioeconómica y Finaciera</button>
+        <div class="dropdown-content">
+          <a (click)="selectOption('registro')">Archivo</a>
+          <a (click)="selectOption('busqueda')">Oficios</a>
+        </div>
+      </div>
+      <div class="dropdown">
+        <button class="dropbtn">Metodologías y Capacitación</button>
+        <div class="dropdown-content">
+          <a (click)="selectOption('registro')">Archivo</a>
+          <a (click)="selectOption('busqueda')">Oficios</a>
+        </div>
+      </div>
+    </div>
+    <button class="logout-btn" (click)="logout()">Salir</button>
+  </div>
+  
+  <div class="main-content">
+    <div *ngIf="selectedOption" class="title-box">
+      <h2>{{ getTitleForOption() }}</h2>
+    </div>
+    
+    <div *ngIf="selectedOption === 'registro'" class="content-box">
+      <button class="option-btn" 
+              [ngClass]="{'active': showFisicoForm}" 
+              (click)="showFisicoRegistrationForm()">Físicos</button>
+      <button class="option-btn" 
+              [ngClass]="{'active': showMoralForm}" 
+              (click)="showMoralRegistrationForm()">Morales</button>
+    </div>
+    
+    <div *ngIf="selectedOption === 'busqueda'" class="search-section">
+      <div class="content-box">
+        <button class="option-btn" 
+                [ngClass]="{'active': isFisicoSearchActive}" 
+                (click)="showFisicoSearchView()">Físicos</button>
+        <button class="option-btn" 
+                [ngClass]="{'active': isMoralSearchActive}" 
+                (click)="showMoralSearchView()">Morales</button>
+      </div>
+      
+      <div class="search-container" *ngIf="showSearchView">
+        <app-search-view *ngIf="isFisicoSearchActive" [ngClass]="{'slide-down': isFisicoSearchActive}"></app-search-view>
+        <app-search-viewmorales *ngIf="isMoralSearchActive" [ngClass]="{'slide-down': isMoralSearchActive}"></app-search-viewmorales>
+      </div>
+    </div>
+    
+    <div class="form-container">
+      <app-fisico-registration *ngIf="showFisicoForm" [ngClass]="{'slide-down': showFisicoForm}"></app-fisico-registration>
+      <app-moral-registration *ngIf="showMoralForm" [ngClass]="{'slide-down': showMoralForm}"></app-moral-registration>
+    </div>
+  </div>
+</div>
